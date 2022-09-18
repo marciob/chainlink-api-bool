@@ -4,11 +4,6 @@ pragma solidity ^0.8.7;
 import "@chainlink/contracts/src/v0.8/ChainlinkClient.sol";
 import "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol";
 
-/**
- * Request testnet LINK and ETH here: https://faucets.chain.link/
- * Find information on LINK Token Contracts and get the latest ETH and LINK faucets here: https://docs.chain.link/docs/link-token-contracts/
- */
-
 contract APIConsumer is ChainlinkClient, ConfirmedOwner {
     using Chainlink for Chainlink.Request;
 
@@ -32,7 +27,6 @@ contract APIConsumer is ChainlinkClient, ConfirmedOwner {
             this.fulfill.selector
         );
 
-        // Set the URL to perform the GET request on
         req.add("get", "https://jsonplaceholder.typicode.com/todos/4");
 
         req.add("path", "completed");
@@ -45,7 +39,6 @@ contract APIConsumer is ChainlinkClient, ConfirmedOwner {
         public
         recordChainlinkFulfillment(_requestId)
     {
-        // bytes32ToString(_text);
         emit RequestVolume(_requestId, _isItOk);
         isItOk = _isItOk;
     }
